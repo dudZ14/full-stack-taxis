@@ -1,0 +1,218 @@
+<h1>Pedir taxi</h1>
+
+<form #form="ngForm" (ngSubmit)="salvarPedido()" class="taxi-form">
+  <div class="form-field">
+    <label for="numeroPessoas">Número de pessoas no taxi:</label>
+    <input
+      type="text"
+      id="numeroPessoas"
+      [(ngModel)]="numeroPessoas"
+      name="numeroPessoas"
+      required
+      placeholder="1"
+      [ngClass]="{ invalid: numeroPessoas && !numeroPessoasValido }"
+    />
+    <div class="error" *ngIf="numeroPessoas && !numeroPessoasValido">
+      O número de pessoas no taxi tem de ser maior ou igual a 1.
+    </div>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="fill">
+      <mat-label>Nível de Conforto</mat-label>
+      <mat-select [(ngModel)]="nivelConforto" name="nivelConforto" required>
+        <mat-option *ngFor="let nivel of niveisConforto" [value]="nivel">
+          {{ nivel }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="error" *ngIf="nivelConforto && !confortoValido">
+      O nível de conforto deve ser "luxuoso" ou "básico".
+    </div>
+  </div>
+
+  <h2>Cliente</h2>
+  <div class="form-field">
+    <label for="nome">Nome:</label>
+    <input
+      type="text"
+      id="nome"
+      [(ngModel)]="nome"
+      name="nome"
+      required
+      placeholder="Ex: João Silva"
+    />
+  </div>
+
+  <div class="form-field">
+    <label for="nif">NIF:</label>
+    <input
+      type="text"
+      id="nif"
+      [(ngModel)]="nif"
+      name="nif"
+      required
+      pattern="^[1-9][0-9]{8}$"
+      placeholder="123456789"
+      [ngClass]="{ invalid: nif && !nifValido }"
+    />
+    <div class="error" *ngIf="nif && !nifValido">
+      O NIF deve ter exatamente 9 dígitos e ser positivo.
+    </div>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="fill">
+      <mat-label>Género</mat-label>
+      <mat-select [(ngModel)]="genero" name="genero" required>
+        <mat-option value="Masculino">Masculino</mat-option>
+        <mat-option value="Feminino">Feminino</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="error" *ngIf="genero && !generoValido">
+      O género deve ser "masculino" ou "feminino".
+    </div>
+  </div>
+
+  <h2>Morada atual</h2>
+  <h5>Detalhes</h5>
+
+  <div class="form-row">
+    <div class="form-field half-width">
+      <label for="porta">Número da Porta:</label>
+      <input
+        type="number"
+        id="porta"
+        [(ngModel)]="numeroPorta"
+        (ngModelChange)="obterCoordenadasPorMorada()"
+        name="porta"
+        min="1"
+        required
+        placeholder="123"
+      />
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="rua">Rua:</label>
+    <input
+      type="text"
+      id="rua"
+      [(ngModel)]="rua"
+      (ngModelChange)="obterCoordenadasPorMorada()"
+      name="rua"
+      required
+      placeholder="Rua Exemplo"
+    />
+  </div>
+
+  <div class="form-field">
+    <label for="codigoPostal">Código Postal:</label>
+    <input
+      type="text"
+      id="codigoPostal"
+      [(ngModel)]="codigoPostal"
+      (ngModelChange)="obterCoordenadasPorMorada()"
+      name="codigoPostal"
+      required
+      placeholder="1234-567"
+    />
+  </div>
+
+  <div class="form-field">
+    <label for="localidade">Localidade:</label>
+    <input
+      type="text"
+      id="localidade"
+      [(ngModel)]="localidade"
+      (ngModelChange)="obterCoordenadasPorMorada()"
+      name="localidade"
+      required
+      placeholder="Lisboa"
+    />
+  </div>
+  <div class="error" *ngIf="!moradaValida">
+    A morada atual não pode ser traduzida em coordenadas.
+  </div>
+
+  <h2>Morada Destino</h2>
+
+  <div *ngIf="mapaVisivel">
+    <h5>Selecione no mapa:</h5>
+    <div id="mapaDestino" style="height: 400px"></div>
+  </div>
+
+  <h5>Detalhes</h5>
+
+  <div class="form-row">
+    <div class="form-field half-width">
+      <label for="destinoNumeroPorta">Número da Porta:</label>
+      <input
+        type="number"
+        id="destinoNumeroPorta"
+        [(ngModel)]="destinoNumeroPorta"
+        (ngModelChange)="obterCoordenadasPorMoradaDestino()"
+        name="destinoNumeroPorta"
+        min="1"
+        required
+        placeholder="123"
+      />
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="destinoRua">Rua:</label>
+    <input
+      type="text"
+      id="destinoRua"
+      [(ngModel)]="destinoRua"
+      (ngModelChange)="obterCoordenadasPorMoradaDestino()"
+      name="destinoRua"
+      required
+      placeholder="Rua Exemplo"
+    />
+  </div>
+
+  <div class="form-field">
+    <label for="destinoCodigoPostal">Código Postal:</label>
+    <input
+      type="text"
+      id="destinoCodigoPostal"
+      [(ngModel)]="destinoCodigoPostal"
+      (ngModelChange)="obterCoordenadasPorMoradaDestino()"
+      name="destinoCodigoPostal"
+      required
+      placeholder="1234-567"
+    />
+  </div>
+
+  <div class="form-field">
+    <label for="destinoLocalidade">Localidade:</label>
+    <input
+      type="text"
+      id="destinoLocalidade"
+      [(ngModel)]="destinoLocalidade"
+      (ngModelChange)="obterCoordenadasPorMoradaDestino()"
+      name="destinoLocalidade"
+      required
+      placeholder="Lisboa"
+    />
+  </div>
+  <div class="error" *ngIf="!moradaDestinoValida">
+    A morada atual não pode ser traduzida em coordenadas.
+  </div>
+
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    [disabled]="
+      !form.valid ||
+      !podeSalvarMotorista ||
+      !moradaValida ||
+      !moradaDestinoValida
+    "
+  >
+    Fazer pedido
+  </button>
+</form>

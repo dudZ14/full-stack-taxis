@@ -1,0 +1,81 @@
+<h1>Detalhes do taxi</h1>
+
+<form #form="ngForm" (ngSubmit)="return()" class="taxi-form">
+  <div class="form-field">
+    <label for="matricula">Matrícula:</label>
+    <input
+      type="text"
+      id="matricula"
+      [(ngModel)]="matricula"
+      name="matricula"
+      required
+      placeholder="AA-01-AA"
+      style="text-transform: uppercase"
+      disabled
+    />
+
+  </div>
+
+  <div class="form-field">
+    <label for="anoCompra">Ano de Compra:</label>
+    <input
+      type="number"
+      id="anoCompra"
+      [(ngModel)]="anoCompra"
+      name="anoCompra"
+      required
+      min="1900"
+      placeholder="2025"
+      disabled
+    />
+  
+  </div>
+
+   <div class="form-field">
+    <label for="marcaSelecionada">Marca:</label>
+    <input
+      type="text"
+      id="marcaSelecionada"
+      [(ngModel)]="marcaSelecionada"
+      name="marcaSelecionada"
+      required
+      disabled
+    />
+
+  </div>
+
+  <div class="form-field">
+    <label for="modeloSelecionado">Modelo:</label>
+    <input
+      type="text"
+      id="modeloSelecionado"
+      [(ngModel)]="modeloSelecionado"
+      name="modeloSelecionado"
+      required
+      disabled
+    />
+
+  </div>
+
+  <div class="form-field">
+    <label for="nivelConforto">Nível de Conforto:</label>
+    <input
+      type="text"
+      id="nivelConforto"
+      [(ngModel)]="nivelConforto"
+      name="nivelConforto"
+      required
+      disabled
+    />
+
+  </div>
+
+  <!-- Botão só fica habilitado se o formulário estiver válido -->
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+  >
+    OK
+  </button>
+</form>

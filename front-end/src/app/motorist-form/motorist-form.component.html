@@ -1,0 +1,148 @@
+<h1>Registar Motorista</h1>
+
+<form #form="ngForm" (ngSubmit)="salvarMotorista()" class="taxi-form">
+
+  <div class="form-field">
+    <label for="nome">Nome:</label>
+    <input 
+      type="text"
+      id="nome"
+      [(ngModel)]="nome" 
+      name="nome" 
+      required
+      placeholder="Ex: João Silva"
+    />
+  </div>
+
+  <div class="form-field">
+    <label for="nif">NIF:</label>
+    <input 
+      type="text"
+      id="nif"
+      [(ngModel)]="nif" 
+      name="nif" 
+      required
+      pattern="^[1-9][0-9]{8}$"
+      placeholder="123456789"
+      [ngClass]="{'invalid': nif && !nifValido}"
+    />
+    <div class="error" *ngIf="nif && !nifValido">
+      O NIF deve ter exatamente 9 dígitos e ser positivo.
+    </div>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="fill">
+      <mat-label>Género</mat-label>
+      <mat-select [(ngModel)]="genero" name="genero" required>
+        <mat-option value="Masculino">Masculino</mat-option>
+        <mat-option value="Feminino">Feminino</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="error" *ngIf="genero && !generoValido">
+      O género deve ser "masculino" ou "feminino".
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="anoNascimento">Ano de Nascimento:</label>
+    <input 
+      type="number" 
+      id="anoNascimento" 
+      [(ngModel)]="anoNascimento" 
+      name="anoNascimento" 
+      required
+      min="1900"
+      placeholder="1980"
+      [ngClass]="{'invalid': anoNascimento && !idadeValida}"
+    />
+    <div class="error" *ngIf="anoNascimento && !idadeValida">
+      O motorista deve ter pelo menos 18 anos e nascer depois de 1900.
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="carta">Número da Carta de Condução:</label>
+    <input 
+      type="number"
+      id="carta"
+      [(ngModel)]="cartaConducao" 
+      name="carta" 
+      required
+      min="1"
+      placeholder="12345678"
+      [ngClass]="{'invalid': cartaConducao && !cartaConducaoValida}"
+    />
+  </div>
+  <div class="error" *ngIf="cartaConducao && !cartaConducaoValida">
+    O número da carta de condução deve ser positivo e único.
+  </div>
+  
+
+  <h2>Morada</h2>
+
+  <div class="form-field">
+    <label for="rua">Rua:</label>
+    <input 
+      type="text"
+      id="rua"
+      [(ngModel)]="rua" 
+      name="rua" 
+      required
+      placeholder="Rua Exemplo"
+    />
+  </div>
+
+  <div class="form-field">
+    <label for="porta">Número da Porta:</label>
+    <input 
+      type="number"
+      id="porta"
+      [(ngModel)]="numeroPorta" 
+      name="porta" 
+      min="1"
+      required
+      placeholder="123"
+    />
+  </div>
+
+  <div class="form-field">
+    <label for="codigoPostal">Código Postal:</label>
+    <input 
+      type="text"
+      id="codigoPostal"
+      [(ngModel)]="codigoPostal" 
+      name="codigoPostal" 
+      required
+      placeholder="1234-567"
+      (ngModelChange)="onCodigoPostalChange()" 
+      [ngClass]="{'invalid': codigoPostalInvalido}" 
+    />
+    <div *ngIf="codigoPostalInvalido" class="error">
+      Código postal não existe.
+    </div>
+  </div>
+  
+  
+
+  <div class="form-field">
+    <label for="localidade">Localidade:</label>
+    <input 
+      type="text"
+      id="localidade"
+      [(ngModel)]="localidade" 
+      name="localidade" 
+      required
+      placeholder="Lisboa"
+    />
+  </div>
+
+  <button 
+    type="submit" 
+    mat-raised-button 
+    color="primary" 
+    [disabled]="!form.valid || !podeSalvarMotorista"
+  >
+    Salvar Motorista
+  </button>
+</form>

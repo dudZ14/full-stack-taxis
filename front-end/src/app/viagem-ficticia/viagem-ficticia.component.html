@@ -1,0 +1,78 @@
+<h1>Simular Viagem</h1>
+
+<form (ngSubmit)="calcularCusto()" #form="ngForm" class="taxi-form">
+
+  <div class="form-field">
+    <label for="inicio">Início:</label>
+    <input 
+      type="datetime-local" 
+      id="inicio" 
+      [(ngModel)]="inicio" 
+      name="inicio" 
+      required 
+      [ngClass]="{'invalid': inicio && !inicioValido}" 
+    />
+    <div class="error" *ngIf="inicio && !inicioValido">
+      Data/hora de início inválida.
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="fim">Fim:</label>
+    <input 
+      type="datetime-local" 
+      id="fim" 
+      [(ngModel)]="fim" 
+      name="fim" 
+      required 
+      [ngClass]="{'invalid': fim && !fimValido}" 
+    />
+    <div class="error" *ngIf="fim && !fimValido">
+      Data/hora de fim inválida ou anterior ao início.
+    </div>
+  </div>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Tipo de Conforto</mat-label>
+    <mat-select 
+      [(ngModel)]="tipoConforto" 
+      name="tipo" 
+      required
+      [ngClass]="{'invalid': tipoConforto && !tipoConfortoValido}"
+    >
+      <mat-option value="" disabled>Selecione um tipo</mat-option>
+      <mat-option value="básico">Básico</mat-option>
+      <mat-option value="luxuoso">Luxuoso</mat-option>
+    </mat-select>
+    <mat-error *ngIf="tipoConforto && !tipoConfortoValido">
+      Selecione um tipo de conforto válido.
+    </mat-error>
+  </mat-form-field>
+  
+  <button 
+    type="submit" 
+    mat-raised-button 
+    color="primary" 
+    [disabled]="!form.valid || !formularioValido"
+  >
+    Calcular
+  </button>
+
+  <div *ngIf="custo !== null" class="resultado" style="margin-top: 2rem;">
+    <h6>Custo estimado: {{ custo | number:'1.2-2' }}€</h6>
+  </div>
+
+  <div class="center-button">
+      <button 
+        type="button" 
+        mat-raised-button 
+        color="primary" 
+        class="small-button"
+        (click)="voltarAtras()"
+        >
+        Ok
+       </button>
+  </div>
+
+</form>
+

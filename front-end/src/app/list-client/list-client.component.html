@@ -1,0 +1,54 @@
+<div class="container">
+    <h1>Os seus pedidos</h1>
+  
+    <button class="add-taxi-button" routerLink="/layout/list-client/client-actions">Criar Pedido</button>
+  
+    <ul class="taxi-list">
+      <li *ngFor="let pedido of pedidos">
+        <a class="card">
+
+          
+          
+          <!-- Se o pedido foi aceite tanto pelo motorista quanto pelo cliente -->
+          <div *ngIf="pedido.aceiteMotorista && pedido.aceiteCliente">
+            <ng-container *ngIf="pedido.turno && isTurno(pedido.turno)">
+              <span><strong>Motorista:</strong> {{ pedido.turno.motorista.nome }}</span>
+              <span> <strong>Taxi: </strong> {{  pedido.turno.taxi.matricula }}  {{ pedido.turno.taxi.marca }} {{ pedido.turno.taxi.modelo }} ({{ pedido.turno.taxi.anoDeCompra }}) - 
+        Nível de Conforto: {{ pedido.turno.taxi.nivelDeConforto }}</span>
+              <span><strong>Distância até ao motorista:</strong> {{ pedido.distancia  | number:'1.1-2' }} km</span>
+              <span><strong>Tempo estimado de chegada do motorista:</strong> {{ (pedido.distancia ?? 0) * 4 | number:'1.1-2' }} min</span>
+              <span><strong>Custo estimado da viagem:</strong> {{ calcularCustoEstimado(pedido) | number:'1.1-2' }} €</span>
+            </ng-container>
+
+            <p class="estado-pedido-texto">Pedido aceite</p>
+          </div>
+          
+          <!-- Se o pedido foi aceite pelo motorista, mas não pelo cliente -->
+          <div *ngIf="pedido.aceiteMotorista && !pedido.aceiteCliente">
+            <ng-container *ngIf="pedido.turno && isTurno(pedido.turno)">
+              <span><strong>Motorista:</strong> {{ pedido.turno.motorista.nome }}</span>
+              <span> <strong>Taxi: </strong> {{  pedido.turno.taxi.matricula }}  {{ pedido.turno.taxi.marca }} {{ pedido.turno.taxi.modelo }} ({{ pedido.turno.taxi.anoDeCompra }}) - 
+        Nível de Conforto: {{ pedido.turno.taxi.nivelDeConforto }}</span>
+              <span><strong>Distância até ao motorista:</strong> {{ pedido.distancia  | number:'1.1-2' }} km</span>
+              <span><strong>Tempo estimado de chegada do motorista:</strong> {{ (pedido.distancia ?? 0) * 4 | number:'1.1-2' }} min</span>
+              <span><strong>Custo estimado da viagem:</strong> {{ calcularCustoEstimado(pedido) | number:'1.1-2' }} €</span>
+            </ng-container>
+            
+            <button class="aceitar-motorista" (click)="aceitarMotorista()">Aceitar Motorista</button>
+            <button class="cancelar-pedido" (click)="recusarMotorista(pedido)">Recusar Motorista</button>
+          </div>
+          
+          <!-- Se o pedido não foi aceite nem pelo motorista nem pelo cliente -->
+          <div *ngIf="!pedido.aceiteMotorista && !pedido.aceiteCliente">
+            <span><strong>Morada Início: </strong>{{ pedido.moradaInicio.rua }}, {{ pedido.moradaInicio.numeroDaPorta }}, {{ pedido.moradaInicio.codigoPostal }} - {{ pedido.moradaInicio.localidade }}</span>
+            <span><strong>Morada Fim: </strong>{{ pedido.moradaFim.rua }}, {{ pedido.moradaFim.numeroDaPorta }}, {{ pedido.moradaFim.codigoPostal }} - {{ pedido.moradaFim.localidade }}</span>
+          <span> <strong>Nível de conforto do taxi: </strong>{{ pedido.nivelDeConforto }} </span>
+          <span> <strong>Número de passageiros: </strong>{{ pedido.numeroPessoas }} </span>
+          <button class="cancelar-pedido" (click)="cancelarPedido(pedido)">Cancelar Pedido</button>
+        </div>
+
+        </a>
+      </li>
+    </ul>
+  </div>
+  

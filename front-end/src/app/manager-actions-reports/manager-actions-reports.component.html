@@ -1,0 +1,419 @@
+<div class="container">
+  <h1>Viagens registadas</h1>
+
+  <div class="date-filters">
+    <label>
+      Data de início:
+      <input
+        type="datetime-local"
+        [(ngModel)]="dataInicio"
+        (change)="onFiltroDataAlterado()"
+      />
+    </label>
+
+    <label>
+      Data de fim:
+      <input
+        type="datetime-local"
+        [(ngModel)]="dataFim"
+        (change)="onFiltroDataAlterado()"
+      />
+    </label>
+  </div>
+
+  <div class="totais-cards">
+    <div class="card" (click)="toggleMostrarSubtotais('horas')">
+      <a>
+        <strong>Total de horas:</strong> {{ totalHoras | number : "1.1-2" }} h
+      </a>
+    </div>
+    <div class="card" (click)="toggleMostrarSubtotais('viagens')">
+      <a> <strong>Total de viagens:</strong> {{ totalViagens }} </a>
+    </div>
+    <div class="card" (click)="toggleMostrarSubtotais('kms')">
+      <a>
+        <strong>Total de distância percorrida:</strong>
+        {{ totalKms | number : "1.2-2" }} km
+      </a>
+    </div>
+  </div>
+  <!-- Subtotais de Horas -->
+  <div *ngIf="mostrarSubtotaisHoras">
+    <h4>Horas por motorista</h4>
+    <table>
+      <tr>
+        <th>Motorista</th>
+        <th>Horas (h)</th>
+      </tr>
+      <tr *ngFor="let m of subtotaisViagensMotoristas">
+        <td
+          [routerLink]="[
+            '/layout/manager-actions/reports/motorista-details',
+            m[0]._id
+          ]"
+          style="cursor: pointer"
+        >
+          {{ m[0].nome }}
+        </td>
+        <td>
+          <!-- Quando NÃO estiver expandido -->
+          <span *ngIf="expandedViagensId !== m[0]._id">
+            {{ m[1].horas | number : "1.2-2" }}
+            {{ m[1].horas === 1 ? "hora" : "horas" }}
+            <span
+              (click)="
+                toggleDetalhesViagens(m[0]._id); $event.stopPropagation()
+              "
+              style="cursor: pointer; margin-left: 8px"
+            >
+              ▶
+            </span>
+          </span>
+
+          <!-- Quando estiver expandido -->
+          <span *ngIf="expandedViagensId === m[0]._id">
+            <a
+              [routerLink]="[
+                '/layout/manager-actions/reports/viagem-detail',
+                m[1].idViagem
+              ]"
+            >
+              viagem das {{ m[1].periodoInicio | date : "shortTime" }} às
+              {{ m[1].periodoFim | date : "shortTime" }} →
+              {{ m[1].horas | number : "1.2-2" }}
+              {{ m[1].horas === 1 ? "hora" : "horas" }}
+            </a>
+            <span
+              (click)="
+                toggleDetalhesViagens(m[0]._id); $event.stopPropagation()
+              "
+              style="cursor: pointer; margin-left: 8px"
+            >
+              ▼
+            </span>
+          </span>
+        </td>
+      </tr>
+    </table>
+
+    <h4>Horas por táxi</h4>
+    <table>
+      <tr>
+        <th>Matrícula</th>
+        <th>Horas (h)</th>
+      </tr>
+      <tr *ngFor="let t of subtotaisViagensTaxis">
+        <td
+          [routerLink]="[
+            '/layout/manager-actions/reports/taxi-details',
+            t[0]._id
+          ]"
+          style="cursor: pointer"
+        >
+          {{ t[0].matricula }}
+        </td>
+        <td>
+          <!-- Quando NÃO estiver expandido -->
+          <span *ngIf="expandedViagensId !== t[0]._id">
+            {{ t[1].horas | number : "1.2-2" }}
+            {{ t[1].horas === 1 ? "hora" : "horas" }}
+            <span
+              (click)="
+                toggleDetalhesViagens(t[0]._id); $event.stopPropagation()
+              "
+              style="cursor: pointer; margin-left: 8px"
+            >
+              ▶
+            </span>
+          </span>
+
+          <!-- Quando estiver expandido -->
+          <span *ngIf="expandedViagensId === t[0]._id">
+            <a
+              [routerLink]="[
+                '/layout/manager-actions/reports/viagem-detail',
+                t[1].idViagem
+              ]"
+            >
+              viagem das {{ t[1].periodoInicio | date : "shortTime" }} às
+              {{ t[1].periodoFim | date : "shortTime" }} →
+              {{ t[1].horas | number : "1.2-2" }}
+              {{ t[1].horas === 1 ? "hora" : "horas" }}
+            </a>
+            <span
+              (click)="
+                toggleDetalhesViagens(t[0]._id); $event.stopPropagation()
+              "
+              style="cursor: pointer; margin-left: 8px"
+            >
+              ▼
+            </span>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Subtotais de KMs -->
+  <div *ngIf="mostrarSubtotaisKms">
+    <h4>Distância percorrida por motorista</h4>
+    <table>
+      <tr>
+        <th>Motorista</th>
+        <th>Distância (km)</th>
+      </tr>
+      <tr *ngFor="let m of subtotaisViagensMotoristas">
+        <td
+          [routerLink]="[
+            '/layout/manager-actions/reports/motorista-details',
+            m[0]._id
+          ]"
+          style="cursor: pointer"
+        >
+          {{ m[0].nome }}
+        </td>
+        <td>
+          <!-- Quando NÃO estiver expandido -->
+          <span *ngIf="expandedViagensId !== m[0]._id">
+            {{ m[1].kms | number : "1.2-2" }}
+            {{ m[1].kms === 1 ? "km" : "km's" }}
+            <span
+              (click)="
+                toggleDetalhesViagens(m[0]._id); $event.stopPropagation()
+              "
+              style="cursor: pointer; margin-left: 8px"
+            >
+              ▶
+            </span>
+          </span>
+
+          <!-- Quando estiver expandido -->
+          <span *ngIf="expandedViagensId === m[0]._id">
+            <a
+              [routerLink]="[
+                '/layout/manager-actions/reports/viagem-detail',
+                m[1].idViagem
+              ]"
+            >
+              viagem das {{ m[1].periodoInicio | date : "shortTime" }} às
+              {{ m[1].periodoFim | date : "shortTime" }} →
+              {{ m[1].kms | number : "1.2-2" }}
+              {{ m[1].kms === 1 ? "km" : "km's" }}
+            </a>
+            <span
+              (click)="
+                toggleDetalhesViagens(m[0]._id); $event.stopPropagation()
+              "
+              style="cursor: pointer; margin-left: 8px"
+            >
+              ▼
+            </span>
+          </span>
+        </td>
+      </tr>
+    </table>
+
+    <h4>Distância percorrida por táxi</h4>
+    <table>
+      <tr>
+        <th>Matrícula</th>
+        <th>Distância (km)</th>
+      </tr>
+      <tr *ngFor="let t of subtotaisViagensTaxis">
+        <td
+          [routerLink]="[
+            '/layout/manager-actions/reports/taxi-details',
+            t[0]._id
+          ]"
+          style="cursor: pointer"
+        >
+          {{ t[0].matricula }}
+        </td>
+        <td>
+          <!-- Quando NÃO estiver expandido -->
+          <span *ngIf="expandedViagensId !== t[0]._id">
+            {{ t[1].kms | number : "1.2-2" }}
+            {{ t[1].kms === 1 ? "km" : "km's" }}
+            <span
+              (click)="
+                toggleDetalhesViagens(t[0]._id); $event.stopPropagation()
+              "
+              style="cursor: pointer; margin-left: 8px"
+            >
+              ▶
+            </span>
+          </span>
+
+          <!-- Quando estiver expandido -->
+          <span *ngIf="expandedViagensId === t[0]._id">
+            <a
+              [routerLink]="[
+                '/layout/manager-actions/reports/viagem-detail',
+                t[1].idViagem
+              ]"
+            >
+              viagem das {{ t[1].periodoInicio | date : "shortTime" }} às
+              {{ t[1].periodoFim | date : "shortTime" }} →
+              {{ t[1].kms | number : "1.2-2" }}
+              {{ t[1].kms === 1 ? "km" : "km's" }}
+            </a>
+            <span
+              (click)="
+                toggleDetalhesViagens(t[0]._id); $event.stopPropagation()
+              "
+              style="cursor: pointer; margin-left: 8px"
+            >
+              ▼
+            </span>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Subtotais de Viagens -->
+  <div *ngIf="mostrarSubtotaisViagens">
+    <h4>Viagens por motorista</h4>
+    <table>
+      <tr>
+        <th>Motorista</th>
+        <th>Viagens</th>
+      </tr>
+      <tr *ngFor="let m of subtotaisViagensMotoristas">
+        <td
+          [routerLink]="[
+            '/layout/manager-actions/reports/motorista-details',
+            m[0]._id
+          ]"
+          style="cursor: pointer"
+        >
+          {{ m[0].nome }}
+        </td>
+        <td>
+          <!-- Quando há 1 viagem e NÃO está expandido -->
+          <span *ngIf="m[1].viagens === 1 && expandedViagensId !== m[0]._id">
+            1 viagem
+            <span
+              (click)="
+                toggleDetalhesViagens(m[0]._id); $event.stopPropagation()
+              "
+              style="cursor: pointer; margin-left: 8px"
+            >
+              ▶
+            </span>
+          </span>
+
+          <!-- Quando há 1 viagem e está expandido -->
+          <span *ngIf="m[1].viagens === 1 && expandedViagensId === m[0]._id">
+            <a
+              [routerLink]="[
+                '/layout/manager-actions/reports/viagem-detail',
+                m[1].idViagem
+              ]"
+            >
+              viagem das {{ m[1].periodoInicio | date : "shortTime" }} às
+              {{ m[1].periodoFim | date : "shortTime" }}
+            </a>
+            <span
+              (click)="
+                toggleDetalhesViagens(m[0]._id); $event.stopPropagation()
+              "
+              style="cursor: pointer; margin-left: 8px"
+            >
+              ▼
+            </span>
+          </span>
+
+          <!-- Quando há mais de 1 viagem -->
+          <span *ngIf="m[1].viagens > 1">
+            {{ m[1].viagens }} viagens
+            <span
+              (click)="
+                toggleDetalhesViagens(m[0]._id); $event.stopPropagation()
+              "
+              style="cursor: pointer; margin-left: 8px"
+            >
+              {{ expandedViagensId === m[0]._id ? "▼" : "▶" }}
+            </span>
+
+            <div *ngIf="expandedViagensId === m[0]._id" class="viagens-detalhe">
+              <p>Mostrar os detalhes das {{ m[1].viagens }} viagens</p>
+            </div>
+          </span>
+        </td>
+      </tr>
+    </table>
+
+    <h4>Viagens por táxi</h4>
+    <table>
+      <tr>
+        <th>Matrícula</th>
+        <th>Viagens</th>
+      </tr>
+      <tr *ngFor="let t of subtotaisViagensTaxis">
+        <td
+          [routerLink]="[
+            '/layout/manager-actions/reports/taxi-details',
+            t[0]._id
+          ]"
+          style="cursor: pointer"
+        >
+          {{ t[0].matricula }}
+        </td>
+        <td>
+          <!-- Quando há 1 viagem e NÃO está expandido -->
+          <span *ngIf="t[1].viagens === 1 && expandedViagensId !== t[0]._id">
+            1 viagem
+            <span
+              (click)="
+                toggleDetalhesViagens(t[0]._id); $event.stopPropagation()
+              "
+              style="cursor: pointer; margin-left: 8px"
+            >
+              ▶
+            </span>
+          </span>
+
+          <!-- Quando há 1 viagem e está expandido -->
+          <span *ngIf="t[1].viagens === 1 && expandedViagensId === t[0]._id">
+            <a
+              [routerLink]="[
+                '/layout/manager-actions/reports/viagem-detail',
+                t[1].idViagem
+              ]"
+            >
+              viagem das {{ t[1].periodoInicio | date : "shortTime" }} às
+              {{ t[1].periodoFim | date : "shortTime" }}
+            </a>
+            <span
+              (click)="
+                toggleDetalhesViagens(t[0]._id); $event.stopPropagation()
+              "
+              style="cursor: pointer; margin-left: 8px"
+            >
+              ▼
+            </span>
+          </span>
+
+          <!-- Quando há mais de 1 viagem -->
+          <span *ngIf="t[1].viagens > 1">
+            {{ t[1].viagens }} viagens
+            <span
+              (click)="
+                toggleDetalhesViagens(t[0]._id); $event.stopPropagation()
+              "
+              style="cursor: pointer; margin-left: 8px"
+            >
+              {{ expandedViagensId === t[0]._id ? "▼" : "▶" }}
+            </span>
+
+            <div *ngIf="expandedViagensId === t[0]._id" class="viagens-detalhe">
+              <p>Mostrar os detalhes das {{ t[1].viagens }} viagens</p>
+            </div>
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+</div>

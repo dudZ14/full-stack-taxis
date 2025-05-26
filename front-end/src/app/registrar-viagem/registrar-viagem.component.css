@@ -1,0 +1,141 @@
+.taxi-form {
+    max-width: 500px;
+    margin: 10px auto;
+    margin-bottom:50px;
+    padding: 24px;
+    background-color: #f1f1f1;
+    border-radius: 32px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 40px;
+  }
+  
+  .form-field {
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  mat-form-field {
+    width: 100%;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  input[type="text"]:hover,
+  input[type="number"]:hover,
+  mat-form-field:hover {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #ecd824;
+    color: #333;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.4s ease-in-out, transform 0.3s ease;
+  }
+  
+  button[type="submit"]:hover:not(:disabled) {
+    background-color: #fdd835;
+    transform: scale(1.02);
+  }
+  
+  button[type="submit"]:disabled {
+    background-color: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+  }
+  
+  input.invalid {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 4px;
+  }
+  
+  
+  #mapaDestino {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  
+  .form-row .form-field {
+    margin-bottom: 0; /* evita espaçamento duplicado entre campos lado a lado */
+  }
+  
+  .half-width {
+    flex: 1;
+  }
+  
+  
+  /* Estilo para a linha de separação entre os acompanhantes */
+  .separador {
+    margin: 20px 0;
+    border-top: 2px solid #007bff; /* Cor azul */
+    width: 100%;
+  }
+  
+  
+  .add-taxi-button {
+    display: block;
+    margin: 20px auto; /* Centraliza o botão */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #FFA500; /* Fundo amarelo torrado */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transição para hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra inicial */
+    width: 160px;
+  }
+  
+  .add-taxi-button:hover {
+    background-color: #FF8C00; /* Fundo mais escuro no hover */
+    transform: scale(1.1); /* Aumenta o botão levemente */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+  }
+
+  .add-taxi-button:disabled {
+    background-color: #f0b44c; /* Laranja mais claro, ainda próximo ao original */
+    color: rgb(85, 82, 82); /* Texto visível, mas não tão forte quanto branco */
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    transition: none;
+    opacity: 0.9; /* Leve transparência para reforçar estado desativado */
+  }
+  
+  .add-taxi-button:disabled:hover {
+    background-color: #f0b44c; /* Sem mudança no hover */
+  }
+  
+.nao-editavel{
+  cursor: not-allowed;
+}
+
+ .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  
+  .form-row .form-field {
+    margin-bottom: 0; /* evita espaçamento duplicado entre campos lado a lado */
+  }
+  

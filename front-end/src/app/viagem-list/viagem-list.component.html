@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>Viagens registadas por {{ motorista?.nome }}</h1>
+
+  <button class="add-taxi-button"
+    [routerLink]="['/layout/motorist-actions', motoristaId, 'list-viagem', 'registrar-viagem']"
+    [disabled]="!pedidoElegivelParaConclusao()"
+    [attr.title]="!pedidoElegivelParaConclusao() ? 'Não existe nenhum pedido aceite por si e pelo cliente' : null">
+    Registar Viagem
+  </button>
+
+  <ul class="taxi-list">
+    <li *ngFor="let viagem of viagens">
+      <a class="card">
+        <div><strong>Nº Sequência:</strong> {{ viagem.numeroSequencia }}</div>
+        <div><strong>Começou a:</strong> {{ viagem.periodo.inicio | date:'dd/MM/yyyy HH:mm' }}</div>
+        <div><strong>Terminou a:</strong> {{ viagem.periodo.fim | date:'dd/MM/yyyy HH:mm' }}</div>
+        <div><strong>Morada Início:</strong> {{ viagem.moradaInicio.rua }}, {{ viagem.moradaInicio.numeroDaPorta }}, {{ viagem.moradaInicio.codigoPostal }} - {{ viagem.moradaInicio.localidade }}</div>
+        <div><strong>Morada Fim:</strong> {{ viagem.moradaFim?.rua }}, {{ viagem.moradaFim?.numeroDaPorta }}, {{ viagem.moradaFim?.codigoPostal }} - {{ viagem.moradaFim?.localidade }}</div>
+        <div><strong>Cliente:</strong> {{ viagem.pedido.cliente.nome }}</div>
+        <div><strong>Número de pessoas:</strong> {{ viagem.numeroPessoas }}</div>
+        <div><strong>Distância percorrida:</strong> {{ viagem.distancia | number:'1.2-2' }} km</div>
+        <div><strong>Custo da viagem:</strong> {{ viagem.custo | number:'1.2-2' }} €</div>
+
+
+      </a>
+    </li>
+  </ul>
+  
+</div>

@@ -1,0 +1,134 @@
+.card-container {
+  display: flex;
+  justify-content: center; /* Centraliza os cards horizontalmente */
+  gap: 30px; /* Espaçamento entre os cards */
+  flex-wrap: wrap; /* Permite que os cards quebrem linha, se necessário */
+  margin-top: 20px; /* Espaçamento acima dos cards */
+}
+
+.taxi-list {
+  list-style: none; /* Remove os marcadores da lista */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Organiza os itens verticalmente */
+  align-items: center; /* Centraliza os itens horizontalmente */
+  gap: 20px; /* Espaçamento entre os itens da lista */
+}
+
+.taxi-list li {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  width: 100%; /* Faz o item ocupar toda a largura disponível */
+}
+
+.taxi-list li a {
+  display: flex; /* Torna o link um contêiner flexível */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  text-align: center; /* Centraliza o texto */
+  background-color: #fff3b0; /* Cor de fundo do card */
+  border-radius: 10px;
+  padding: 15px;
+  width: 100%; /* Faz o link ocupar toda a largura do item */
+  max-width: 600px; /* Define uma largura máxima */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none; /* Remove o sublinhado */
+  color: #333; /* Cor do texto */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.taxi-list li a:hover {
+  transform: translateY(-5px); /* Eleva o card ao passar o mouse */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.taxi-list li a span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.add-taxi-button {
+  display: block;
+  margin: 20px auto; /* Centraliza o botão */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ffa500; /* Fundo amarelo torrado */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transição para hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra inicial */
+}
+
+.add-taxi-button:hover {
+  background-color: #ff8c00; /* Fundo mais escuro no hover */
+  transform: scale(1.1); /* Aumenta o botão levemente */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+}
+
+.add-taxi-button:disabled {
+  background-color: #f0b44c; /* Laranja mais claro, ainda próximo ao original */
+  color: rgb(85, 82, 82); /* Texto visível, mas não tão forte quanto branco */
+  box-shadow: none;
+  transform: none;
+  transition: none;
+  opacity: 0.9; /* Leve transparência para reforçar estado desativado */
+}
+
+.add-taxi-button:disabled:hover {
+  background-color: #f0b44c; /* Sem mudança no hover */
+}
+
+.taxi-list li a div {
+  margin-bottom: 8px; /* Espaçamento entre as linhas */
+  text-align: left; /* Alinha o texto à esquerda dentro do card */
+  width: 100%;
+}
+/* Atualize para que o cursor 'not-allowed' só se aplique quando o botão estiver desativado */
+
+.taxi-form {
+  display: flex; /* Torna o formulário um contêiner flexível */
+  justify-content: center; /* Centraliza o conteúdo horizontalmente */
+  align-items: center; /* Centraliza o conteúdo verticalmente */
+  width: 100%; /* Garante que ocupe a largura completa */
+  margin-top: 20px; /* Espaçamento acima do formulário */
+}
+
+.taxi-form * {
+  cursor: default !important; /* Remove o cursor 'not-allowed' de todos os elementos */
+}
+
+/* Apenas no botão desabilitado, altere o cursor para 'not-allowed' */
+button[type="submit"]:disabled {
+  cursor: not-allowed;
+  background-color: #e0e0e0;
+  color: #999;
+  pointer-events: none; /* Impede qualquer interação com o botão */
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background-color: #fdd835;
+  transform: scale(1.02);
+}
+
+button[type="submit"] {
+  width: 20%; /* Largura do botão */
+  padding: 12px;
+  font-size: 16px;
+  background-color: #ecd824;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.4s ease-in-out, transform 0.3s ease;
+  text-align: center; /* Garante que o texto dentro do botão seja centralizado */
+}
+
+.taxi-form button {
+  cursor: pointer !important; /* Garante que o botão tem o cursor normal quando habilitado */
+}
+

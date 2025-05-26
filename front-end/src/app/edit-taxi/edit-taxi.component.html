@@ -1,0 +1,96 @@
+<h1>Edição de taxi</h1>
+
+<form #form="ngForm" (ngSubmit)="updateTaxi()" class="taxi-form">
+  <div class="form-field">
+    <label for="matricula">Matrícula:</label>
+    <input
+      type="text"
+      id="matricula"
+      [(ngModel)]="matricula"
+      name="matricula"
+      required
+      placeholder="AA-01-AA"
+      [ngClass]="{ invalid: matricula && !matriculaValida }"
+      style="text-transform: uppercase"
+    />
+
+    <div class="error" *ngIf="matricula && !matriculaValida">
+      Matrícula inválida. Formatos permitidos:
+      <ul>
+        <li>AA-01-TU</li>
+        <li>AA-01-AA</li>
+        <li>00-AA-00</li>
+        <li>00-00-AA</li>
+        <li>AA-00-00</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="anoCompra">Ano de Compra:</label>
+    <input
+      type="number"
+      id="anoCompra"
+      [(ngModel)]="anoCompra"
+      name="anoCompra"
+      required
+      min="1900"
+      placeholder="2025"
+      [ngClass]="{ invalid: anoCompra && !anoValido }"
+    />
+    <div class="error" *ngIf="anoCompra && !anoValido">
+      O ano de compra deve ser entre 1900 e {{ currentYear }}.
+    </div>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="fill">
+      <mat-label>Marca</mat-label>
+      <mat-select [(ngModel)]="marcaSelecionada" name="marca" required>
+        <mat-option *ngFor="let marca of marcas" [value]="marca">{{
+          marca
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="fill">
+      <mat-label>Modelo</mat-label>
+      <mat-select [(ngModel)]="modeloSelecionado" name="modelo" required>
+        <mat-option *ngFor="let modelo of modelosDisponiveis" [value]="modelo">
+          {{ modelo }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="form-field">
+    <mat-form-field appearance="fill" [class.disabled-conforto]="viagemComEsseTaxi"  [attr.title]="viagemComEsseTaxi ? 'Não pode editar o conforto de um taxi com viagens.' : null">
+      <mat-label>Nível de Conforto</mat-label>
+      <mat-select
+        [(ngModel)]="nivelConforto"
+        name="nivelConforto"
+        required
+        [disabled]="viagemComEsseTaxi"
+      >
+        <mat-option *ngFor="let nivel of niveisConforto" [value]="nivel">
+          {{ nivel }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="error" *ngIf="nivelConforto && !confortoValido">
+      O nível de conforto deve ser "luxuoso" ou "básico".
+    </div>
+  </div>
+
+  <!-- Botão só fica habilitado se o formulário estiver válido -->
+  <button
+    type="submit"
+    mat-raised-button
+    color="primary"
+    [disabled]="!form.valid || !podeSalvar"
+  >
+    Atualizar Taxi
+  </button>
+</form>

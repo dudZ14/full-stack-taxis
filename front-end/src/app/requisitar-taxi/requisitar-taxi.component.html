@@ -1,0 +1,69 @@
+<h1>Requisitar taxi para turno</h1>
+
+<form (ngSubmit)="addTurno()" #form="ngForm" class="taxi-form">
+
+  <div class="form-field">
+    <label for="inicio">Início:</label>
+    <input 
+      type="datetime-local" 
+      id="inicio" 
+      [(ngModel)]="inicio" 
+      (ngModelChange)="onPeriodoChange()"
+      name="inicio" 
+      required 
+      [ngClass]="{'invalid': inicio && (erroInicioAntesAgora )}" 
+    />
+  </div>
+
+  <div class="form-field">
+    <label for="fim">Fim:</label>
+    <input 
+      type="datetime-local" 
+      id="fim" 
+      [(ngModel)]="fim" 
+      (ngModelChange)="onPeriodoChange()"
+      name="fim" 
+      required 
+      [ngClass]="{'invalid': fim && (erroDuracaoSuperiorOitoHoras || erroFimAntesInicio || erroDuracaoSuperiorOitoHoras || erroInterseccaoTurnos)}" 
+    />
+    <div class="error" *ngIf="erroInicioAntesAgora">
+      O turno deve começar depois da hora atual.
+    </div>
+    
+    <div class="error" *ngIf="erroFimAntesInicio">
+      O início do turno deve ser anterior ao seu fim.
+    </div>
+    
+    <div class="error" *ngIf="erroDuracaoSuperiorOitoHoras">
+      A duração do turno não deve ser superior a 8 horas.
+    </div>
+    
+    <div class="error" *ngIf="erroInterseccaoTurnos">
+      O turno não pode intersetar outro turno do mesmo motorista.
+    </div>
+  </div>
+
+  <!-- Exibir a lista de táxis disponíveis após o usuário selecionar início e fim -->
+  <div class="form-field" *ngIf="taxisDisponiveis.length > 0 && inicio && fim && formularioValido">
+    <label for="taxi">Selecione um Táxi:</label>
+    <ul class="taxi-list">
+        <li *ngFor="let taxi of taxisDisponiveis">
+          <a class="card" [class.selected]="selectedTaxi?.matricula === taxi.matricula" (click)="selecionarTaxi(taxi)"><strong>{{ taxi.matricula }}</strong>  {{ taxi.marca }} {{ taxi.modelo }} ({{ taxi.anoDeCompra }}) - 
+          Nível de Conforto: {{ taxi.nivelDeConforto }}
+          </a>
+        </li>
+    </ul>
+  </div>
+
+  <button 
+    type="submit" 
+    mat-raised-button 
+    color="primary" 
+    [disabled]="!form.valid || !formularioValido || !selectedTaxi "
+  >
+    Adicionar turno
+  </button>
+
+</form>
+
+

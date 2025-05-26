@@ -1,0 +1,20 @@
+
+  
+  h3 {
+    color: #333;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  /* Responsividade: Cards em uma coluna para telas menores */
+  @media (max-width: 900px) {
+    .card-container {
+      grid-template-columns: 1fr; /* Apenas 1 coluna */
+      justify-items: center; /* Centraliza os cards horizontalmente */
+    }
+  
+    .card {
+      width: 100%; /* Cards ocupam toda a largura do contêiner */
+      max-width: 300px; /* Define um limite máximo para a largura */
+    }
+  }

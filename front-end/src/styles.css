@@ -1,0 +1,133 @@
+
+/* Fundo gradiente para o site inteiro */
+html, body {
+  min-height: 100vh; /* Garante altura mínima da viewport */
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #FFEB3B 0%, #FFEB3B 10%, #fff 90%, #fff 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%; /* Estica o gradiente para cobrir toda a altura */
+  background-color: #fff; /* Garante branco no fundo restante */
+}
+
+
+/* Customizações específicas */
+.container {
+  margin-top: 50px;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #FFF3B0 !important; /* Aplicando cor de fundo preta com !important */
+  border-radius: 20px !important;
+  width: 180px;
+  padding: 20px;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+
+  /* Adicionando Flexbox para centralizar os ícones */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza verticalmente */
+  align-items: center; /* Centraliza horizontalmente */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  width: 64px;
+  height: 64px;
+  margin-bottom: 15px;
+}
+
+.card span {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .card-container {
+    grid-template-columns: 1fr; /* Apenas 1 coluna */
+    justify-items: center; /* Centraliza os cards horizontalmente */
+    margin-top: 30px;
+  }
+  
+  .card {
+    width: 100%; /* Cards ocupam toda a largura do contêiner */
+    max-width: 300px; /* Define um limite máximo para a largura */
+  }
+  
+  .taxi-form{
+    width: 80%;
+    padding-top:10px;
+  }
+
+  #botao-voltar {
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 14px;
+    padding: 4px 8px;
+    margin: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  #botao-voltar:hover {
+    transform: scale(1.05) translateX(-50%);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .toast-top-right {
+    top: 10px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    right: auto !important;
+    
+    width: 100% !important;
+    max-width: 300px;
+    
+    font-size: 14px;
+    text-align: center;
+    padding: 8px 10px;
+    margin-top: 90px !important;
+    margin-left: 80px !important;
+    
+    z-index: 9999;
+  }
+
+  h1 {
+    padding-top: 40px;
+    padding-bottom: 8px; /* Menor espaço abaixo do título */
+    font-size: 40px;
+    margin-bottom: 0; /* Remover espaçamento grande abaixo do h1 */
+  }
+  
+}
+
+html, body {
+  min-height: 100vh; /* mantém fundo preenchido */
+  height: auto;       /* permite que a altura se ajuste ao conteúdo */
+}
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+

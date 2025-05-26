@@ -1,0 +1,129 @@
+.card-container {
+    display: flex;
+    justify-content: center; /* Centraliza os cards horizontalmente */
+    gap: 30px; /* Espaçamento entre os cards */
+    flex-wrap: wrap; /* Permite que os cards quebrem linha, se necessário */
+    margin-top: 20px; /* Espaçamento acima dos cards */
+  }
+  
+  .taxi-list {
+    list-style: none; /* Remove os marcadores da lista */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Organiza os itens verticalmente */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    gap: 20px; /* Espaçamento entre os itens da lista */
+  }
+  
+  .taxi-list li {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    width: 100%; /* Faz o item ocupar toda a largura disponível */
+  }
+  
+  .taxi-list li a {
+    display: flex; /* Torna o link um contêiner flexível */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    text-align: center; /* Centraliza o texto */
+    background-color: #FFF3B0; /* Cor de fundo do card */
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%; /* Faz o link ocupar toda a largura do item */
+    max-width: 600px; /* Define uma largura máxima */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-decoration: none; /* Remove o sublinhado */
+    color: #333; /* Cor do texto */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .taxi-list li a:hover {
+    transform: translateY(-5px); /* Eleva o card ao passar o mouse */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .taxi-list li a span {
+    font-size: 16px;
+    font-weight: normal;
+  }
+  
+  .taxi-list li a span strong {
+    font-weight: bold;
+  }
+  
+
+  .add-taxi-button {
+    display: block;
+    margin: 20px auto; /* Centraliza o botão */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #FFA500; /* Fundo amarelo torrado */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transição para hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra inicial */
+  }
+  
+  .add-taxi-button:hover {
+    background-color: #FF8C00; /* Fundo mais escuro no hover */
+    transform: scale(1.1); /* Aumenta o botão levemente */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra mais forte no hover */
+  }
+
+
+  .aceitar-pedido {
+    background-color: green; /* Vermelho forte */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 15px;
+    align-self: center; /* Centraliza dentro do flex se aplicável */
+  }
+  
+  .aceitar-pedido:hover {
+    background-color: green; /* Vermelho mais escuro no hover */
+    transform: scale(1.05);
+  }
+
+  .loading-container {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .spinner {
+    margin: 0 auto 10px auto;
+    width: 40px;
+    height: 40px;
+    border: 5px solid rgba(0,0,0,0.1);
+    border-top: 5px solid #007bff; /* azul */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .aceitar-pedido:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+  
+  .estado-pedido-texto {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #007bff;
+    font-size: 1.2rem; 
+  }
+  

@@ -1,0 +1,273 @@
+.card-container {
+  display: flex;
+  justify-content: center; /* Centraliza os cards horizontalmente */
+  gap: 30px; /* Espaçamento entre os cards */
+  flex-wrap: wrap; /* Permite que os cards quebrem linha, se necessário */
+  margin-top: 20px; /* Espaçamento acima dos cards */
+}
+
+.taxi-list {
+  list-style: none; /* Remove os marcadores da lista */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Organiza os itens verticalmente */
+  align-items: center; /* Centraliza os itens horizontalmente */
+  gap: 20px; /* Espaçamento entre os itens da lista */
+}
+
+.taxi-list li {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  width: 100%; /* Faz o item ocupar toda a largura disponível */
+}
+
+.taxi-list li a {
+  display: flex; /* Torna o link um contêiner flexível */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  text-align: center; /* Centraliza o texto */
+  background-color: #fff3b0; /* Cor de fundo do card */
+  border-radius: 10px;
+  padding: 15px;
+  width: 100%; /* Faz o link ocupar toda a largura do item */
+  max-width: 600px; /* Define uma largura máxima */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-decoration: none; /* Remove o sublinhado */
+  color: #333; /* Cor do texto */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.taxi-list li a:hover {
+  transform: translateY(-5px); /* Eleva o card ao passar o mouse */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.taxi-list li a span {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.taxi-list li a div {
+  margin-bottom: 8px; /* Espaçamento entre as linhas */
+  text-align: left; /* Alinha o texto à esquerda dentro do card */
+  width: 100%;
+}
+
+.container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.date-filters {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center;     /* Alinha verticalmente */
+  gap: 30px;               /* Espaço entre os inputs */
+  margin-bottom: 20px;
+  flex-wrap: wrap;         /* Permite quebra em telas pequenas */
+}
+
+.date-filters label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* Centraliza texto e input */
+  font-weight: bold;
+  color: #555;
+}
+
+
+.date-filters input[type="datetime-local"] {
+  background-color: #fff8dc; /* fundo distinto por input */
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Efeito hover individual */
+.date-filters input[type="datetime-local"]:hover {
+  border-color: #e0b100;
+  box-shadow: 0 0 8px rgba(224, 177, 0, 0.3);
+  cursor: pointer;
+}
+
+/* Efeito ao focar no campo */
+.date-filters input[type="datetime-local"]:focus {
+  border-color: #c29600;
+  box-shadow: 0 0 8px rgba(192, 150, 0, 0.5);
+  outline: none;
+}
+
+
+
+.card {
+  cursor: pointer;
+}
+
+h4 {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+ul li {
+  margin-bottom: 10px;
+  text-align: left;
+  font-size: 16px;
+}
+
+.totais-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.totais-cards .card {
+  background-color: #fff3b0;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.totais-cards .card a {
+  color: #000; /* Garante texto preto */
+  text-decoration: none;
+  display: block;
+}
+
+.totais-cards .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.subtotais-section {
+  margin: 20px 0;
+}
+
+.subtotais-section h4 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.subtotais-grid {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.subtotais-card {
+  flex: 1;
+  min-width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff3b0;
+}
+
+.subtotais-card h5 {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
+}
+
+.subtotais-card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.subtotais-card li {
+  padding: 4px 0;
+  font-size: 0.95em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px auto;
+  background-color: #fef9e7;
+  border: 2px solid #e0c97f;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th,
+table td {
+  border: 1px solid #d6b861;
+  padding: 10px;
+  text-align: center;
+}
+
+table th {
+  background-color: #f8e6a0;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Zebra effect com tons mais escuros */
+table tr:nth-child(even) {
+  background-color: #f7e2aa; /* tom mais escuro */
+}
+
+table tr:nth-child(odd) {
+  background-color: #fff7d6; /* um pouco mais claro */
+}
+
+table tr:hover {
+  background-color: #ffe89a; /* destaque no hover */
+}
+
+h4 {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 15px;
+  color: #444;
+  font-size: 2.5em;
+  position: relative;
+  padding-bottom: 0px;
+  margin-top: 20px; /* Margem superior menor */
+  margin-bottom: 0px;
+}
+
+/* Linha decorativa abaixo do título */
+h4::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #e0b100;
+  margin: 10px auto 0 auto;
+  border-radius: 2px;
+  margin-bottom: 0px;
+}
+
+a{
+  color:black
+}

@@ -1,0 +1,12 @@
+<button 
+  *ngIf="mostrarBotaoVoltar()" 
+  class="card" 
+  mat-button 
+  (click)="voltar()"
+  id="botao-voltar"
+>
+  <span class="material-icons">arrow_back</span>
+  Voltar
+</button>
+
+<router-outlet></router-outlet>

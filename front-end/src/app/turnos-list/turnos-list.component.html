@@ -1,0 +1,16 @@
+<div class="container">
+    <h1>Turnos de {{motorista?.nome}}</h1>
+
+    <button class="add-taxi-button" [routerLink]="['/layout/motorist-actions', motoristaId, 'list', 'requisitar-taxi']">Adicionar Turno</button>
+    
+    <ul class="taxi-list">
+      <li *ngFor="let turno of turnos">
+        <a class="card">
+            Inicio: <strong>{{ turno.periodo.inicio | date:'dd/MM/yyyy HH:mm' }}</strong> 
+            Fim: <strong>{{ turno.periodo.fim | date:'dd/MM/yyyy HH:mm' }}</strong> 
+            Taxi:<strong>{{ turno.taxi.matricula }}</strong> 
+            Motorista:<strong>{{ turno.motorista.nome }}</strong> 
+        </a>
+      </li>
+    </ul>
+  </div>

@@ -1,0 +1,38 @@
+  <div class="container">
+    <h1>Pedidos dos clientes</h1>
+
+    <div *ngIf="carregando" class="loading-container">
+      <div class="spinner"></div>
+      <p>A carregar pedidos...</p>
+    </div>
+
+    <ul *ngIf="!carregando" class="taxi-list">
+      <li *ngFor="let pedido of pedidos" >
+        <a class="card" *ngIf="!pedido.pedidoConcluido">
+
+          <span><strong>Morada Início: </strong>{{ pedido.moradaInicio.rua }}, {{ pedido.moradaInicio.numeroDaPorta }}, {{ pedido.moradaInicio.codigoPostal }} - {{ pedido.moradaInicio.localidade }}</span>
+          <span><strong>Morada Fim: </strong>{{ pedido.moradaFim.rua }}, {{ pedido.moradaFim.numeroDaPorta }}, {{ pedido.moradaFim.codigoPostal }} - {{ pedido.moradaFim.localidade }}</span>
+          <span><strong>Número de passageiros:</strong> {{ pedido.numeroPessoas }}</span>
+          <span><strong>Distância até ao cliente:</strong>  {{ pedido.distancia | number:'1.1-2' }} km</span>
+
+          <ng-container *ngIf="!pedido.aceiteMotorista; else estadoPedidoTexto">
+            <button
+              class="aceitar-pedido"
+              [disabled]="algumPedidoEmCurso() && !pedido.aceiteMotorista"
+              (click)="aceitarPedido(pedido)"
+              [attr.title]="algumPedidoEmCurso() && !pedido.aceiteMotorista ? 'Primeiro conclua o pedido corrente.' : null"
+            >
+              Aceitar Pedido
+            </button>
+          </ng-container>
+          
+          <ng-template #estadoPedidoTexto>
+            <p class="estado-pedido-texto">
+              {{ pedido.aceiteCliente ? 'Pedido aceite pelo cliente' : 'A aguardar resposta do cliente' }}
+            </p>
+          </ng-template>
+          
+        </a>
+      </li>
+    </ul>
+  </div>

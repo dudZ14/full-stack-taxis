@@ -1,0 +1,18 @@
+<div class="container">
+  <h1>Olá, {{motorista.nome}} </h1>
+  <h3>Ações de Motorista</h3>
+  <div class="card-container">
+    <a class="card" [routerLink]="['/layout/motorist-actions', motoristaId, 'list']">
+      <i class="material-icons large">local_taxi</i>
+      <span>Requisitar taxi para turno</span>
+    </a>
+    <a class="card" [routerLink]="['/layout/motorist-actions', motoristaId, 'aceitar-taxi']">
+      <i class="material-icons large">check_circle</i>
+      <span>Aceitar pedido de taxi</span>
+    </a>
+    <a class="card" [routerLink]="['/layout/motorist-actions', motoristaId, 'list-viagem']">
+      <i class="material-icons large">event</i>
+      <span>Registar viagem com cliente</span>
+    </a>
+  </div>
+</div>

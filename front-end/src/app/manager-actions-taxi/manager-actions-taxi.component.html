@@ -1,0 +1,31 @@
+<div class="container">
+  <h1>Lista de taxis</h1>
+
+  <button
+    class="add-taxi-button"
+    routerLink="/layout/manager-actions/taxis/create"
+  >
+    Adicionar Taxi
+  </button>
+
+  <ul class="taxi-list">
+    <li *ngFor="let taxi of taxis">
+      <a class="card"
+        ><strong>{{ taxi.matricula }}</strong> {{ taxi.marca }}
+        {{ taxi.modelo }} ({{ taxi.anoDeCompra }}) - Nível de Conforto:
+        {{ taxi.nivelDeConforto }}
+        <div class="botoes-taxi">
+          <button
+            class="aceitar-motorista"
+            [routerLink]="['/layout/manager-actions/taxis', taxi._id]"
+          >
+            Editar Taxi
+          </button>
+          <button class="cancelar-pedido" (click)="removerTaxi(taxi)"
+          [disabled]="taxisEmUso.has(taxi._id)"
+          [attr.title]="taxisEmUso.has(taxi._id) ? 'Taxi está em uso num turno.' : null">Remover Taxi</button>
+        </div>
+      </a>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,140 @@
+.taxi-form {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 24px;
+    background-color: #f1f1f1;
+    border-radius: 32px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .form-field {
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  mat-form-field {
+    width: 100%;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  input[type="text"]:hover,
+  input[type="number"]:hover,
+  mat-form-field:hover {
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #ecd824;
+    color: #333;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.4s ease-in-out, transform 0.3s ease;
+  }
+  
+  button:hover:not(:disabled) {
+    background-color: #fdd835;
+    transform: scale(1.02);
+  }
+  
+  button:disabled {
+    background-color: #e0e0e0;
+    color: #999;
+    cursor: not-allowed;
+  }
+
+  #btn-simular{
+    margin-bottom: 20px;
+  }
+  
+  input.invalid {
+    border: 2px solid red;
+    background-color: #ffe6e6;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 4px;
+  }
+
+
+  .center-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  .small-button {
+    margin-top: 1px;
+    font-size: 1rem;
+    padding: 4px 12px;
+    min-width: auto;
+    width: 25%;
+
+  }
+  
+  .card-container {
+    display: flex;
+    justify-content: center; /* Centraliza os cards horizontalmente */
+    gap: 30px; /* Espaçamento entre os cards */
+    flex-wrap: wrap; /* Permite que os cards quebrem linha, se necessário */
+    margin-top: 20px; /* Espaçamento acima dos cards */
+  }
+  
+  .taxi-list {
+    list-style: none; /* Remove os marcadores da lista */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Organiza os itens verticalmente */
+    align-items: center; /* Centraliza os itens horizontalmente */
+    gap: 20px; /* Espaçamento entre os itens da lista */
+  }
+  
+  .taxi-list li {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    width: 100%; /* Faz o item ocupar toda a largura disponível */
+  }
+  
+  .taxi-list li a {
+    display: flex; /* Torna o link um contêiner flexível */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    text-align: center; /* Centraliza o texto */
+    background-color: #FFF3B0; /* Cor de fundo do card */
+    border-radius: 10px;
+    padding: 15px;
+    width: 100%; /* Faz o link ocupar toda a largura do item */
+    max-width: 600px; /* Define uma largura máxima */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-decoration: none; /* Remove o sublinhado */
+    color: #333; /* Cor do texto */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .taxi-list li a:hover {
+    transform: translateY(-5px); /* Eleva o card ao passar o mouse */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .taxi-list li a span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  a{
+    cursor: pointer;
+  }
+  .card.selected {
+    border: 2px solid #e3400e; /* uma borda sutil opcional */
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* mais destaque */
+  }
+  

@@ -1,0 +1,75 @@
+<h1>Login do Motorista</h1>
+<form #form="ngForm" class="taxi-form">
+  <div class="opcao">
+    <mat-form-field appearance="fill">
+      <mat-label>Forma de login</mat-label>
+      <mat-select [(ngModel)]="loginModo" name="loginModo" required>
+        <mat-option value="nif">NIF</mat-option>
+        <mat-option value="lista">Lista de Motoristas</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="loginModo === 'nif'" class="form-field">
+    <label for="nif">NIF:</label>
+    <input
+      type="text"
+      id="nif"
+      [(ngModel)]="nif"
+      name="nif"
+      required
+      pattern="^[1-9][0-9]{8}$"
+      placeholder="123456789"
+      [ngClass]="{ invalid: nif && !nifValido }"
+    />
+    <div class="error" *ngIf="nif && !nifValido">
+      O NIF deve ter exatamente 9 dígitos e ser positivo.
+    </div>
+
+    <div class="botao-container">
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="!nif || !nifValido"
+        (click)="loginNif()"
+      >
+        Login
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="loginModo === 'lista'">
+    <h4>Lista de Motoristas</h4>
+    <ul class="taxi-list">
+      <li *ngFor="let motorista of motoristas">
+        <a
+          class="card"
+          [class.selected]="selectedMotorista?.NIF === motorista.NIF"
+          (click)="selecionarMotorista(motorista)"
+        >
+          <strong>{{ motorista.nome }}</strong>
+          ({{ motorista.genero }}, NIF: {{ motorista.NIF }}, Nascido em
+          {{ motorista.anoDeNascimento }})<br />
+          Carta: {{ motorista.cartaDeConducao }}<br />
+          Morada: {{ motorista.morada.rua }},
+          {{ motorista.morada.numeroDaPorta }},
+          {{ motorista.morada.codigoPostal }} -
+          {{ motorista.morada.localidade }}
+        </a>
+      </li>
+    </ul>
+
+    <div class="botao-container">
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="!selectedMotorista"
+        (click)="loginPorSelecao()"
+      >
+        Login
+      </button>
+    </div>
+  </div>
+</form>

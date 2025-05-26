@@ -1,0 +1,29 @@
+<div class="container">
+    <h1>Lista de Motoristas</h1>
+  
+    <button class="add-taxi-button" routerLink="/layout/manager-actions/motorists/motorists-form">
+      Adicionar Motorista
+    </button>
+  
+    <ul class="taxi-list">
+      <li *ngFor="let motorista of motoristas">
+        <a class="card">
+          <strong>{{ motorista.nome }}</strong> 
+          ({{ motorista.genero }}, NIF: {{ motorista.NIF }}, Nascido em {{ motorista.anoDeNascimento }})<br>
+          Carta: {{ motorista.cartaDeConducao }}<br>
+          Morada: {{ motorista.morada.rua }}, {{ motorista.morada.numeroDaPorta }}, {{ motorista.morada.codigoPostal }} - {{ motorista.morada.localidade }}
+           <div class="botoes-taxi">
+          <button
+            class="aceitar-motorista"
+            [routerLink]="['/layout/manager-actions/motorists', motorista._id]"
+          >
+            Editar Motorista
+          </button>
+          <button class="cancelar-pedido" (click)="removerMotorista(motorista)" [disabled]="motoristasEmUso.has(motorista._id)"
+          [attr.title]="motoristasEmUso.has(motorista._id) ? 'Motorista está ativo num turno.' : null">Remover Motorista</button>
+        </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  
